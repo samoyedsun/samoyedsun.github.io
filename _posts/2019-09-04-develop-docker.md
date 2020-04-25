@@ -7,7 +7,7 @@ tag: code
 
 ### 环境: ubuntu 18.04
 
-docker的安装这里就不赘述了.
+docker的安装这里就不赘述了.
 
 - 修改docker服务
     ```bash
