@@ -21,7 +21,7 @@ aws cloudwatch put-metric-data --metric-name RequestLatency --namespace GetStart
 
  The parameter MetricData.member.1.Unit must be a value in the set [ Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None ].
 
- 意思是：--unit这个字段必须选择以上中括号中的单位，不允许自定义.
+ 意思是：--unit这个字段必须选择以上中括号中的单位，不允许自定义.
 
 ``` bash
 aws cloudwatch get-metric-statistics --namespace GetStarted --metric-name RequestLatency --statistics Average --start-time 2016-10-14T00:00:00Z --end-time 2016-10-15T00:00:00Z --period 60
