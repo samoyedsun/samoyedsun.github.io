@@ -1,0 +1,113 @@
+img, embed, object, video {
+  max-width: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.main {
+    padding: 1.5rem; /* 1.5 is good for mobile */
+    max-width:960px;
+    margin:auto;
+
+    color: #333; /* comfortable for reading */
+
+    overflow: hidden; /* make it wrap float elements */
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+    text-rendering: optimizeLegibility;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+}
+
+.main a {
+    color: #428bca;
+    text-decoration: none;
+}
+
+/*** frontpage ***/
+
+.fp-title {
+    margin-top: 0;
+}
+
+
+@media (max-width: 700px) { /* for small screen */
+    .colum1 {
+        float: left;
+        min-width: 50%;
+    }
+
+    .colum2 {
+        float: left;
+        min-width: 40%;
+    }
+
+    .fp-right {
+        clear:both;
+        padding-top: 3em;
+    }
+}
+
+@media  (min-width: 700px) {  /* for large screen */
+    .fp-left {
+        float: left;
+        min-width: 35%;
+        margin-right: 5%;
+    }
+
+    .fp-right {
+        float: left;
+        max-width: 50%;
+    }
+}
+
+
+/*** postlist ***/
+
+.entry {
+    margin-bottom: 20px;
+}
+
+.entry h2 {
+    margin-top: 10px;
+}
+
+.entry p {
+    font-size: 14px;
+}
+
+
+/*** post ***/
+
+.post-title {
+    text-align: center;
+    font-size: 1.8em;
+    margin: 0.8em 0em 1.8em;
+}
+
+.post-toc {
+    margin-bottom: 2em;
+    color: #888;
+}
+
+.post {
+    line-height: 1.7;
+    font-size: 18px;
+}
+
+.post figure { 
+
+    /* remove code block's horizontal margin */
+
+    margin-left: 0;
+    margin-right:0;
+}
+
