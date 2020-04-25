@@ -1,0 +1,19 @@
+---
+layout: common
+---
+
+
+{% if page.mathjax %}
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+{% endif %}
+
+<article class="post markdown-body">
+    <small>{{ page.date | date: "%Y-%m-%d" }}</small>
+    <div class="post-title">{{page.title}}</div>
+    {{content}}
+    <hr/>
+    <h6 style="text-align:center"><a href="http://lazyrobot.me/">lazyrobot.me</a></h6>
+</article>
+
