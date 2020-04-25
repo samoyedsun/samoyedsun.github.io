@@ -4,11 +4,11 @@ layout: nil
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
  
-  <title>lazyrobot.me - {{ page.name }}</title>
-  <link href="http://lazyrobot.me"/>
-  <link type="application/atom+xml" rel="self" href="http://lazyrobot.me/atom.xml"/>
+  <title>samoyedsun.github.io - {{ page.name }}</title>
+  <link href="http://samoyedsun.github.io"/>
+  <link type="application/atom+xml" rel="self" href="http://samoyedsun.github.io/atom.xml"/>
   <updated>{{ site.time | date_to_xmlschema }}</updated>
-  <id>http://lazyrobot.me</id>
+  <id>http://samoyedsun.github.io</id>
   <author>
     <name>hqwrong</name>
   </author>
@@ -17,8 +17,8 @@ layout: nil
   {% if post.tag != "draft" %}
   {% if post.tag == page.tag or page.tag == "ALL" %}
       <entry>
-        <id>http://lazyrobot.me{{ post.id }}</id>
-        <link type="text/html" rel="alternate" href="http://lazyrobot.me{{ post.url }}"/>
+        <id>http://samoyedsun.github.io{{ post.id }}</id>
+        <link type="text/html" rel="alternate" href="http://samoyedsun.github.io{{ post.url }}"/>
         <title>{{ post.title | xml_escape }}</title>
         <updated>{{ post.date | date_to_xmlschema }}</updated>
         <content type="html">{{ post.content | xml_escape }}</content>
