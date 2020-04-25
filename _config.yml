@@ -1,0 +1,16 @@
+destination: ./_site
+lsi:         false
+port:        4000
+highligher:  true
+markdown:    kramdown
+permalink:   date
+excerpt_separator: "<!excerpt>"
+timezone: Asia/Chongqing
+
+rdiscount:
+  input: GFM
+
+kramdown:
+  parse_block_html: true
+
+title: Samoyedsun's Blog
