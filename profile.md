@@ -11,9 +11,5 @@ layout: frontpage
 ### 在其他地方找到我
 
 
-- <p><a href="https://github.com/hqwrong" target="tab">GitHub</a></p>
-- <p><a href="http://www.douban.com/people/61430577/" target="tab">豆瓣</a></p>
-- 公众号
-
-   ![](/assets/images/qrcode.jpg)
-
+- <p><a href="https://github.com/samoyedsun" target="tab">GitHub</a></p>
+- <p><a href="https://www.pinterest.com/samoyedsun" target="tab">Pinterest</a></p>
