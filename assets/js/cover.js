@@ -10,8 +10,7 @@ var covers = [
     ['/assets/images/covers/IMG_20200628_143833.jpg', '珠海'],
     ['/assets/images/covers/IMG_20200628_143852.jpg', '珠海'],
     ['/assets/images/covers/IMG_20200628_144043.jpg', '珠海'],
-    ['/assets/images/covers/IMG_20200628_144406.jpg', '珠海'],
-    ['/assets/images/covers/IMG_20200725_154616.jpg', '珠海']
+    ['/assets/images/covers/IMG_20200628_144406.jpg', '珠海']
 ]
 
     var i = Math.floor(Math.random() * covers.length);
