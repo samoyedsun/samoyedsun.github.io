@@ -2,7 +2,7 @@
 layout: post
 title:  "高效工作利器"
 date:   2019-03-29 15:31:26 +0800
-tag: code
+tag: note
 ---
 
 ### Windows平台

@@ -2,7 +2,7 @@
 layout: post
 title:  "EKS node 初始化脚本"
 date:   2019-03-16 11:31:26 +0800
-tag: code
+tag: note
 ---
 
 # EKS中的EC2实例上有一个文件用于初始化服务器的

@@ -2,7 +2,7 @@
 layout: post
 title:  "使用http api开发docker"
 date:   2019-09-04 21:29:43 +0800
-tag: code
+tag: note
 ---
 
 ### 环境: ubuntu 18.04

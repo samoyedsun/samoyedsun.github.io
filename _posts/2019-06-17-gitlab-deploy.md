@@ -2,7 +2,7 @@
 layout: post
 title:  "完整的gitlab服务搭建"
 date:   2019-06-18 15:31:26 +0800
-tag: code
+tag: note
 ---
 
 - Git的优点

@@ -2,7 +2,7 @@
 layout: post
 title:  "关于composer"
 date:   2019-02-14 15:25:26 +0800
-tag: code
+tag: note
 ---
 
 在这里我来记录一下我关于composer的一些知识点实践。首先我做以下一系列操作使用composer安装一个叫做monolog的包，然后写一个例子使用这个包, 以这里为切入点去理解composer。

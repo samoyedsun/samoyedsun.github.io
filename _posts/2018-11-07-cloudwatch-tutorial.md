@@ -2,7 +2,7 @@
 layout: post
 title:  "cloudwatch操作笔记"
 date:   2018-11-07 12:20:26 +0800
-tag: code
+tag: note
 ---
 
 ![](/images/2018-11-07-cloudwatch-tutorial.png)
