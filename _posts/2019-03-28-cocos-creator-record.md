@@ -2,7 +2,7 @@
 layout: post
 title:  "CocosCreator调用安卓接口实现录音"
 date:   2019-03-28 11:39:26 +0800
-tag: note
+tag: code
 ---
 
 在我使用CocosCreator打包安卓应用程序的时候，会有一些安卓平台依赖的文件从CocosCreator引擎中拷贝到项目目录，然后编译的时候会将一些在安卓平台用到的代码一起编译到应用程序中，比如下面就有几个文件:

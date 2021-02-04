@@ -2,7 +2,7 @@
 layout: post
 title:  "学习笔记之git"
 date:   2018-04-17 16:25:26 +0800
-tag: note
+tag: code
 ---
 ```
 首先在主服务器上建一个repo文件夹

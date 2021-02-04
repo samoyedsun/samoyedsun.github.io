@@ -2,7 +2,7 @@
 layout: post
 title:  "比特币钱包服务搭建"
 date:   2021-02-02 14:51:26 +0800
-tag: note
+tag: code
 ---
 
 Launch service:

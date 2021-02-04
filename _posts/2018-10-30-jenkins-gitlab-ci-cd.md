@@ -2,7 +2,7 @@
 layout: post
 title:  "jenkins/gitlab实现ci/cd笔记"
 date:   2018-10-30 17:36:26 +0800
-tag: note
+tag: code
 ---
 
 - 首先我开了一台centos7系统的ECS实例, 安装并启动docker服务, 创建存放kubectl,aws,ssh配置的目录

@@ -3,4 +3,4 @@ layout: postlist
 tag: story
 ---
 
-诗和故事
+【生活与故事】
