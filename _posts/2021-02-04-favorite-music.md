@@ -10,3 +10,4 @@ tag: note
 | Assassin's Tango | John Powell |
 | Burning | Maria Arredondo |
 | Just One Last Dance | Sarah Connor |
+| Heartbeat Song | Kelly Clarkson |
