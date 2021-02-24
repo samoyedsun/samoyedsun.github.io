@@ -41,15 +41,14 @@ txindex=1
 启动服务:
 ```bash
 omnicored -testnet #连接test3测试网络，会同步test3网络的区块数据（约20G）
-omnicored -regtest #单机运行，不需要连接其他网络，区块数据在本地运行。
 omnicored          #连接比特币主网网络，会同步真实区块数据（约250G，要4-5天时间同步完成）
 
-omnicored -regtest -datadir=/root/.omnicore -conf=/root/.omnicore/bitcoin.conf -daemon
+omnicored -testnet -datadir=/root/.omnicore -conf=/root/.omnicore/bitcoin.conf -daemon
 ```
 
 测试服务:
 ```bash
-curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getwalletinfo"}' --user test http://127.0.0.1:18332
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getwalletinfo"}' --user test:123456 http://127.0.0.1:18332
 ```
 
 常用API示例
