@@ -48,9 +48,28 @@ omnicored -testnet -datadir=/root/.omnicore -conf=/root/.omnicore/bitcoin.conf -
 
 测试服务:
 ```bash
-curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getwalletinfo"}' --user test:123456 http://127.0.0.1:18332
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getnetworkinfo"}' --user test:123456 http://127.0.0.1:18332 -s | python3 -m json.tool
+
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getblockchaininfo"}' --user test:123456 http://127.0.0.1:18332 -s | python3 -m json.tool
+
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getwalletinfo"}' --user test:123456 http://127.0.0.1:18332 -s | python3 -m json.tool
 ```
 
-常用API示例
+新建钱包地址:
 ```bash
+# param1: lable 钱包账户名称 一个账户名可以对应多个地址
+# param2: output_type 地址类型(legacy|p2sh-segwit|bech32) 默认是p2sh-segwit
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getnewaddress","params":["HelloWorld", "p2sh-segwit"]}' --user test:123456 http://127.0.0.1:18332 -s | python3 -m json.tool
+```
+
+获取钱包地址:
+```bash
+# param1: lable 钱包账户名称 一个账户名可以对应多个地址
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getaddressesbylabel","params":["HelloWorld"]}' --user test:123456 http://127.0.0.1:18332 -s | python3 -m json.tool
+```
+
+获取USDT数量:
+```bash
+# param1: address 钱包地址
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"omni_getbalance","params":["2MzAwwvoBqEfoADpRPFZV8HDwCBYfnhKP1R",31]}' --user test:123456 http://127.0.0.1:18332 -s | python3 -m json.tool
 ```
