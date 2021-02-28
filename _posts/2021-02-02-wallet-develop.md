@@ -91,12 +91,27 @@ curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0
 
 调用将指定的地址或公钥脚本添加到钱包中
 ```bash
-curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"importaddress","params":["2MzAwwvoBqEfoADpRPFZV8HDwCBYfnhKP1R", "address1formhelloworld"]}' --user test:123456 http://127.0.0.1:18332/wallet/johnwallet -s | python3 -m json.tool
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"importaddress","params":["2MzAwwvoBqEfoADpRPFZV8HDwCBYfnhKP1R", "johnwallet"]}' --user test:123456 http://127.0.0.1:18332/wallet/ -s | python3 -m json.tool
+```
+
+调用将指定的私钥导入钱包
+```bash
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"importprivkey","params":["cQPEnyZM76XeN27NvZ4Whkyaa26Yhz47qXquHyDTxyvSUGqgV2x2", "johnwallet"]}' --user test:123456 http://127.0.0.1:18332/wallet/ -s | python3 -m json.tool
 ```
 
 获取钱包中的地址
 ```bash
 curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"listaddressgroupings"}' --user test:123456 http://127.0.0.1:18332/wallet/johnwallet -s | python3 -m json.tool
+```
+
+调用在内存中保存钱包的解密密钥，并在 指定的超时时间后自动锁定钱包
+```bash
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"walletpassphrase","params":["helloworld123456", 60]}' --user test:123456 http://127.0.0.1:18332/wallet/johnwallet -s | python3 -m json.tool
+```
+
+调用将钱包里的所有密钥导出到指定的文件
+```bash
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"dumpwallet","params":["/tmp/johnwallet.txt"]}' --user test:123456 http://127.0.0.1:18332/wallet/johnwallet -s | python3 -m json.tool
 ```
 
 挖矿并将奖励发送到指定钱包地址
