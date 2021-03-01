@@ -65,6 +65,12 @@ curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0
 curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"encryptwallet","params":["qazwsx123"]}' --user test:123456 http://127.0.0.1:18332/wallet/johnwallet222 -s | python3 -m json.tool
 ```
 
+解锁钱包 调用在内存中保存钱包的解密密钥，并在 指定的超时时间后自动锁定钱包
+```bash
+# param1: passphrase 密码
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"walletpassphrase","params":["qazwsx123", 60]}' --user test:123456 http://127.0.0.1:18332/wallet/johnwallet -s | python3 -m json.tool
+```
+
 新建钱包地址
 ```bash
 # param1: lable 标签 用于地址分类
@@ -110,11 +116,6 @@ curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0
 获取钱包中的地址
 ```bash
 curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"listaddressgroupings"}' --user test:123456 http://127.0.0.1:18332/wallet/johnwallet -s | python3 -m json.tool
-```
-
-调用在内存中保存钱包的解密密钥，并在 指定的超时时间后自动锁定钱包
-```bash
-curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"walletpassphrase","params":["helloworld123456", 60]}' --user test:123456 http://127.0.0.1:18332/wallet/johnwallet -s | python3 -m json.tool
 ```
 
 调用将钱包里的所有密钥导出到指定的文件
