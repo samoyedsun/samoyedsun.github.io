@@ -53,41 +53,49 @@ curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0
 curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getblockchaininfo"}' --user test:123456 http://127.0.0.1:18332 -s | python3 -m json.tool
 ```
 
-新建钱包地址:
+创建钱包
 ```bash
-# param1: lable 钱包账户名称 一个账户名可以对应多个地址
+# param1: wallet_name 钱包名称
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"createwallet","params":["johnwallet222"]}' --user test:123456 http://127.0.0.1:18332 -s | python3 -m json.tool
+```
+
+对钱包设置密码
+```bash
+# param1: passphrase 密码
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"encryptwallet","params":["qazwsx123"]}' --user test:123456 http://127.0.0.1:18332/wallet/johnwallet222 -s | python3 -m json.tool
+```
+
+新建钱包地址
+```bash
+# param1: lable 标签 用于地址分类
 # param2: output_type 地址类型(legacy|p2sh-segwit|bech32) 默认是p2sh-segwit
-curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getnewaddress","params":["HelloWorld", "p2sh-segwit"]}' --user test:123456 http://127.0.0.1:18332/wallet/ -s | python3 -m json.tool
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getnewaddress","params":["HelloWorld", "p2sh-segwit"]}' --user test:123456 http://127.0.0.1:18332/wallet/johnwallet222 -s | python3 -m json.tool
 ```
 
-获取钱包地址:
+获取钱包地址
 ```bash
-# param1: lable 钱包账户名称 一个账户名可以对应多个地址
-curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getaddressesbylabel","params":["HelloWorld"]}' --user test:123456 http://127.0.0.1:18332/wallet/ -s | python3 -m json.tool
-```
-
-获取USDT数量:
-```bash
-# param1: address 钱包地址
-curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"omni_getbalance","params":["2MzAwwvoBqEfoADpRPFZV8HDwCBYfnhKP1R",31]}' --user test:123456 http://127.0.0.1:18332/wallet/ -s | python3 -m json.tool
+# param1: lable 标签 用于地址分类
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getaddressesbylabel","params":["HelloWorld"]}' --user test:123456 http://127.0.0.1:18332/wallet/johnwallet222 -s | python3 -m json.tool
 ```
 
 导出指定地址的私钥
 ```bash
 # param1: address 钱包地址
-curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"dumpprivkey","params":["2MzAwwvoBqEfoADpRPFZV8HDwCBYfnhKP1R"]}' --user test:123456 http://127.0.0.1:18332/wallet/ -s | python3 -m json.tool
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"dumpprivkey","params":["2MzAwwvoBqEfoADpRPFZV8HDwCBYfnhKP1R"]}' --user test:123456 http://127.0.0.1:18332/wallet/johnwallet222 -s | python3 -m json.tool
 ```
 
-创建钱包
+获取USDT数量:
 ```bash
-# param1: address 钱包名称
-curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"createwallet","params":["johnwallet"]}' --user test:123456 http://127.0.0.1:18332 -s | python3 -m json.tool
+# param1: address 钱包地址
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"omni_getbalance","params":["2MzAwwvoBqEfoADpRPFZV8HDwCBYfnhKP1R",31]}' --user test:123456 http://127.0.0.1:18332 -s | python3 -m json.tool
 ```
 
 获取钱包信息
 ```bash
-curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getwalletinfo"}' --user test:123456 http://127.0.0.1:18332/wallet/johnwallet -s | python3 -m json.tool
+curl -H 'Content-Type:application/json' -X POST --data '{"id":"1","jsonrpc":"2.0","method":"getwalletinfo"}' --user test:123456 http://127.0.0.1:18332/wallet/johnwallet222 -s | python3 -m json.tool
 ```
+
+---
 
 调用将指定的地址或公钥脚本添加到钱包中
 ```bash
