@@ -23,9 +23,11 @@ vim /root/.omnicore/bitcoin.conf
 必要的配置信息: bitcoin.conf
 ```bitcoin.conf
 # 测试网络为1，主网络为0
-testnet=1
+testnet=0
 # 是否启用RPC客户端
 server=1
+# 监听
+rpcbind=0.0.0.0:8332
 # RPC客户端的用户名
 rpcuser=test
 # RPC客户端的密码
