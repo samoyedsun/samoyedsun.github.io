@@ -12,3 +12,4 @@ tag: story
 | Just One Last Dance | Sarah Connor |
 | Heartbeat Song | Kelly Clarkson |
 | 永远同在 | 久石让 |
+| In the End | Tommee Profitt |
