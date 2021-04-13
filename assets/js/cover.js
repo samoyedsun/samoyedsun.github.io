@@ -13,8 +13,5 @@ var covers = [
     ['/assets/images/covers/IMG_20200628_144406.jpg', '珠海']
 ]
 
-    var i = Math.floor(Math.random() * covers.length);
-    
-    document.getElementById("cover-image").setAttribute("src", covers[i][0])
-
-    
+var i = Math.floor(Math.random() * covers.length);
+document.getElementById("cover-image").setAttribute("src", covers[i][0])

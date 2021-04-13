@@ -1,8 +1,10 @@
-- Jekyll安装使用:
+- 开发命令:
     ```shell
     sudo gem install jekyll bundler
-    jekyll new blog
-    cd blog
+    if ["you don‘t have one"]; then
+        jekyll new blog
+        cd blog
+    fi
     sudo bundle install
     bundle exec jekyll build
     bundle exec jekyll server
