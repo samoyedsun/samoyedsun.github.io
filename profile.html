@@ -4,47 +4,12 @@ layout: frontpage
 <link rel="stylesheet" href="/assets/css/profile.css" />
 <div class="main">
     <div class="item">
-        <div class="title">
-            装备
-        </div>
-        <div class="body">
-            <div class="app-h"> MacBook Pro </div>
-            <div class="app-h"> Xiao Mi 10 Pro </div>
-            <div class="app-h"> Redmi AirDots 2 </div>
-            <div class="app-s"> Telegram </div>
-            <div class="app-s"> Gmail </div>
-            <div class="app-s"> Chrome </div>
-            <div class="app-s"> YouTuBe </div>
-            <div class="app-s"> Twiter </div>
-            <div class="app-s"> Pinterest </div>
-            <div class="app-s"> Shadowsocks </div>
-            <div class="app-s"> Analytics </div>
-            <div class="app-s"> Quora </div>
-            <div class="app-s"> MEGA </div>
-            <div class="app-s"> WPS</div>
-            <div class="app-s"> QQ </div>
-            <div class="app-s"> QQ音乐 </div>
-            <div class="app-s"> 微信 </div>
-            <div class="app-s"> 支付宝 </div>
-            <div class="app-s"> 阿里云 </div>
-            <div class="app-s"> 身份验证器 </div>
-            <div class="app-s"> 百度网盘 </div>
-            <div class="app-s"> 高德地图 </div>
-            <div class="app-s"> 有道云笔记 </div>
-            <div class="app-s"> 钉钉 </div>
-            <div class="app-s"> 优酷 </div>
-            <div class="app-s"> 天猫 </div>
-            <div class="app-s"> 淘宝 </div>
-            <div class="app-s"> 京东 </div>
-            <div class="app-s"> 巴姆雷特 </div>
-            <div class="app-s"> 哔哩哔哩 </div>
-        </div>
     </div>
     <div class="bottom">
-        <div class="item">
+        <div class="item" onclick="refreshItemList('equip', '装备')">
             装备
         </div>
-        <div class="item">
+        <div class="item" onclick="refreshItemList('skill', '技能')">
             技能
         </div>
         <div class="item">
@@ -55,3 +20,81 @@ layout: frontpage
         </div>
     </div>
 </div>
+<script>
+    var family = "equip";
+    var familyList = [
+        { family: "equip", name: "装备" },
+        { family: "equip", name: "技能" },
+    ];
+    var itemList = [
+        { family: "equip", name: "MacBook Pro", classType: "app-h" },
+        { family: "equip", name: "Xiao Mi 10 Pro", classType: "app-h" },
+        { family: "equip", name: "Redmi AirDots 2", classType: "app-h" },
+        { family: "equip", name: "Telegram", classType: "app-s" },
+        { family: "equip", name: "Gmail", classType: "app-s" },
+        { family: "equip", name: "Chrome", classType: "app-s" },
+        { family: "equip", name: "YouTuBe", classType: "app-s" },
+        { family: "equip", name: "Twiter", classType: "app-s" },
+        { family: "equip", name: "Pinterest", classType: "app-s" },
+        { family: "equip", name: "Shadowsocks", classType: "app-s" },
+        { family: "equip", name: "Analytics", classType: "app-s" },
+        { family: "equip", name: "Quora", classType: "app-s" },
+        { family: "equip", name: "MEGA", classType: "app-s" },
+        { family: "equip", name: "WPS", classType: "app-s" },
+        { family: "equip", name: "QQ", classType: "app-s" },
+        { family: "equip", name: "QQ音乐", classType: "app-s" },
+        { family: "equip", name: "微信", classType: "app-s" },
+        { family: "equip", name: "支付宝", classType: "app-s" },
+        { family: "equip", name: "阿里云", classType: "app-s" },
+        { family: "equip", name: "身份验证器", classType: "app-s" },
+        { family: "equip", name: "百度网盘", classType: "app-s" },
+        { family: "equip", name: "高德地图", classType: "app-s" },
+        { family: "equip", name: "有道云笔记", classType: "app-s" },
+        { family: "equip", name: "钉钉", classType: "app-s" },
+        { family: "equip", name: "优酷", classType: "app-s" },
+        { family: "equip", name: "天猫", classType: "app-s" },
+        { family: "equip", name: "淘宝", classType: "app-s" },
+        { family: "equip", name: "京东", classType: "app-s" },
+        { family: "equip", name: "巴姆雷特", classType: "app-s" },
+        { family: "equip", name: "哔哩哔哩", classType: "app-s" },
+        { family: "skill", name: "c", classType: "app-h" },
+        { family: "skill", name: "lua", classType: "app-h" },
+        { family: "skill", name: "skynet", classType: "app-h" },
+        { family: "skill", name: "linux", classType: "app-h" },
+        { family: "skill", name: "c++", classType: "app-s" },
+    ];
+    function clearItemList(familyName) {
+        var itemClass = document.getElementsByClassName("item")[0];
+
+        var titleClass = document.getElementsByClassName("title")[0];
+        if (titleClass != undefined) {
+            itemClass.removeChild(titleClass);
+        }
+        var bodyClass = document.getElementsByClassName("body")[0];
+        if (titleClass != undefined) {
+            itemClass.removeChild(bodyClass);
+        }
+
+        var divObj = document.createElement("div");
+        divObj.className = "title";
+        divObj.innerText = familyName;
+        itemClass.appendChild(divObj);
+
+        var divObj = document.createElement("div");
+        divObj.className = "body";
+        itemClass.appendChild(divObj);
+    }
+    function refreshItemList(family, familyName) {
+        clearItemList(familyName);
+        for (i = 0; i < itemList.length; ++ i) {
+            let item = itemList[i];
+            if (item.family == family) {
+                var divObj = document.createElement("div");
+                divObj.className = item.classType;
+                divObj.innerHTML = item.name;
+                document.getElementsByClassName("body")[0].appendChild(divObj);
+            }
+        }     
+    }
+    refreshItemList("equip", "装备");
+</script>
