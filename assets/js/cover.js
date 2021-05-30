@@ -10,8 +10,13 @@ var covers = [
     ['/assets/images/covers/IMG_20200628_143833.jpg', '珠海'],
     ['/assets/images/covers/IMG_20200628_143852.jpg', '珠海'],
     ['/assets/images/covers/IMG_20200628_144043.jpg', '珠海'],
-    ['/assets/images/covers/IMG_20200628_144406.jpg', '珠海']
+    ['/assets/images/covers/IMG_20200628_144406.jpg', '珠海'],
+    ['/assets/images/covers/IMG_20210525_144444.jpeg', '广州'],
+    ['/assets/images/covers/IMG_20210525_155555.jpeg', '广州'],
+    ['/assets/images/covers/IMG_20210525_166666.jpeg', '广州'],
+    ['/assets/images/covers/IMG_20210525_177777.jpeg', '广州']
 ]
 
 var i = Math.floor(Math.random() * covers.length);
 document.getElementById("cover-image").setAttribute("src", covers[i][0])
+document.getElementById("cover-image").innerHTML = covers[i][1]
