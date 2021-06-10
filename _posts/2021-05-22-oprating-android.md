@@ -8,7 +8,7 @@ tag: code
 - mac上命令行操作安卓:
     ```
     brew tap homebrew/cask
-    brew cask install android-platform-tools
+    brew install --cask android-platform-tools
     # 然后use连接手机开启开发者模式
     adb devices
     # 设置目标设备以监听端口 5555 上的 TCP/IP 连接。
