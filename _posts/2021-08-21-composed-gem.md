@@ -51,7 +51,7 @@ tag:    issue
 
     short compose_gem(map<int, int> &self_map, int need_composed_id, int need_composed_amount, map<int, int> &need_map)
     {
-        map<int, int> composed_map;
+        int composed_amount = 0;
         for (int i = 1; i < need_composed_id; i++)
         {
             int amount = 0;
@@ -59,17 +59,10 @@ tag:    issue
             {
                 amount = self_map[i];
             }
-            int composed_amount = 0;
-            if (composed_map.find(i) != self_map.end())
-            {
-                composed_amount = composed_map[i];
-            }
             int composed_amount_next = (amount + composed_amount) / 4;
             if (composed_amount_next > 0)
             {
-                composed_map[i + 1] = composed_amount_next;
                 int real_need_amount = composed_amount_next * 4 - composed_amount;
-                cout << real_need_amount << "\t" << composed_amount << endl;
                 if (real_need_amount > 0)
                     need_map[i] = real_need_amount;
                 else if (real_need_amount < 0)
@@ -78,6 +71,7 @@ tag:    issue
                     int give_back_amount = 0 - real_need_amount;
                     give_back_remain(i - 1, give_back_amount, need_map);
                 }
+                composed_amount = composed_amount_next;
             }
             else
             {
@@ -88,14 +82,12 @@ tag:    issue
                     if (it != need_map.end())
                         need_map.erase(it);
                 }
+                composed_amount = 0;
             }
         }
-        map<int, int>::iterator composed_it = composed_map.find(need_composed_id);
-        if (composed_it == composed_map.end())
+        int give_back_amount = composed_amount - need_composed_amount;
+        if (give_back_amount < 0)
             return -1;
-            
-        int real_need_amount = need_composed_amount - composed_it->second; 
-        int give_back_amount = 0 - real_need_amount;
         give_back_remain(need_composed_id - 1, give_back_amount, need_map);
         return 0;
     }
@@ -103,10 +95,10 @@ tag:    issue
     int main()
     {
         int need_composed_id = 9;
-        int need_composed_amount = 1;
+        int need_composed_amount = 3;
         map<int, int> self_map;
         self_map[1] = 10;
-        self_map[2] = 2;
+        self_map[2] = 10000;
         self_map[4] = 1000;
         self_map[5] = 100;
         self_map[6] = 100;
@@ -114,11 +106,14 @@ tag:    issue
         map<int, int> need_map;
         int ret = compose_gem(self_map, need_composed_id, need_composed_amount, need_map);
         if (ret != 0)
+        {
+            cout << "Material are not enough! Synthesis failed." << endl;
             return -1;
+        }
         cout << "need_map:" << endl;
         for (map<int, int>::iterator it = need_map.begin(); it != need_map.end(); it++)
         {
-            cout << "KEY:" << it->first << " VALUE:" << it->second << endl;
+            cout << "k:" << it->first << " v:" << it->second << endl;
         }
         return 0;
     }
