@@ -2,7 +2,7 @@
 layout: post
 title:  "瑞士军刀的N种招式"
 date:   2020-10-07 16:35:26 +0800
-tag: code
+tag: notes
 ---
 
 

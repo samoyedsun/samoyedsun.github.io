@@ -2,7 +2,7 @@
 layout: post
 title:  "USDT钱包服务搭建并测试"
 date:   2021-02-02 14:51:26 +0800
-tag: code
+tag: notes
 ---
 
 安装:

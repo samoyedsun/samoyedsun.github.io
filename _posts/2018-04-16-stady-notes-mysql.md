@@ -2,7 +2,7 @@
 layout: post
 title:  "学习笔记之mysql"
 date:   2018-04-16 14:48:26 +0800
-tag: code
+tag: notes
 ---
 
 **简介：**

@@ -2,7 +2,7 @@
 layout: post
 title:  "1分钟创建一个管理后台"
 date:   2019-03-29 15:31:26 +0800
-tag: code
+tag: notes
 ---
 
 - 废话不多说，上命令!
