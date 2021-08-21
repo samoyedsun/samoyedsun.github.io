@@ -88,17 +88,18 @@ tag:    issue
         int give_back_amount = composed_amount - need_composed_amount;
         if (give_back_amount < 0)
             return -1;
-        give_back_remain(need_composed_id - 1, give_back_amount, need_map);
+        else if (give_back_amount > 0)
+            give_back_remain(need_composed_id - 1, give_back_amount, need_map);
         return 0;
     }
 
     int main()
     {
         int need_composed_id = 9;
-        int need_composed_amount = 3;
+        int need_composed_amount = 2;
         map<int, int> self_map;
         self_map[1] = 10;
-        self_map[2] = 10000;
+        self_map[2] = 10;
         self_map[4] = 1000;
         self_map[5] = 100;
         self_map[6] = 100;
