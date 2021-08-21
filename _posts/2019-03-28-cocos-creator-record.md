@@ -28,7 +28,7 @@ tag: notes
     - TO: /Users/mazhao/baccarat-client/build/jsb-link/cocos-project-template.json
 
 然后我在【/Users/mazhao/baccarat-client/build/jsb-link/frameworks/runtime-src/proj.android-studio/app/src/org/cocos2dx/javascript/】这个目录下加入一个叫RecordAndPlayHelper.java的类，内部提供一套操作语音的静态方法供js使用jsb调用; 前提需要安装Api Level是25的SDK, 修改【/Users/mazhao/baccarat-client/build/jsb-link/frameworks/runtime-src/proj.android-studio/app/build.gradle】中compileSdkVersion字段的值为25，在dependencies字典中加入一行 compile 'com.android.support:support-v4:25.3.1' 因为我们的语音类中有功能需要等级25的SDK支持才能使用; 然后在【/Users/mazhao/baccarat-client/build/jsb-link/frameworks/runtime-src/proj.android-studio/app/AndroidManifest.xml】中加入两个用户权限 "android.permission.RECORD_AUDIO", "android.permission.MODIFY_AUDIO_SETTINGS", 提醒用户给程序授权可以使用语音。好吧，下面是RecordAndPlayHelper.java类的源码:
-``` java
+```java
 //
 // Source code recreated from a .class file by IntelliJ IDEA // (powered by Fernflower decompiler)
 //

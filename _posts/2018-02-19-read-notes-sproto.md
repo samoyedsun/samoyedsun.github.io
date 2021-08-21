@@ -8,7 +8,7 @@ tag: notes
 **一：**
 -------------
 
-``` c
+```c
 // align by 8
 sz = (sz + 7) & ~7;
 ```
@@ -82,7 +82,7 @@ sz = (sz + 7) & ~7;
 **二：**
 -------------
 
-``` c
+```c
 static inline int
 toword(const uint8_t * p) {
 	return p[0] | p[1]<<8;
@@ -99,14 +99,14 @@ todword(const uint8_t *p) {
 **三：**
 -------------
 
-``` c
+```c
 static int
 struct_field(const uint8_t * stream, size_t sz)
 ```
 
 解析数据前用此接口验证数据格式是否合法的，合法返回header value，也就是字段数量; 否则返回-1.
 
-``` c
+```c
 static struct sproto *
 create_from_bundle(struct sproto *s, const uint8_t * stream, size_t sz)
 ```
@@ -116,7 +116,7 @@ create_from_bundle(struct sproto *s, const uint8_t * stream, size_t sz)
 **四：**
 -------------
 
-``` c
+```c
 if (tag <= last)
     return NULL;	// tag must in ascending order
 if (tag > last+1) {
@@ -127,7 +127,7 @@ last = tag;
 
 tag必须按照升序排列，但是tag可以不连续; 如果不连续，则记录的跳开的数字差. 这里没看明白，需要阅读其他代码才能明白这里。
 
-``` c
+```c
 t->base = t->f[0].tag;
 n = t->f[n-1].tag - t->base + 1;
 if (n != t->n) {
@@ -199,7 +199,7 @@ blackhole 4 {
 
 遇到一个不熟悉的接口 lua_upvalueindex(1) ,关于闭包和上值的; 通过阅读[这里](http://blog.csdn.net/linuxheik/article/details/18702479)我理解了！
 
-``` c
+```c
 #define ENCODE_BUFFERSIZE 2050
 
 static void *
@@ -235,7 +235,7 @@ pushfunction_withbuffer 会在进程启动的时候预先为绑定的命令生�
 **六：**
 -------------
 
-``` lua
+```lua
 local tag = R"09" ^ 1 / tonumber
 ```
 
@@ -251,7 +251,7 @@ patt / function
 
 将patt捕获到的值作为参数传递到function,调用function得到最终结果。就像shell中的管道命令
 
-``` lua
+```lua
 local function count_lines(_,pos, parser_state)
 	if parser_state.pos < pos then
 		parser_state.line = parser_state.line + 1
@@ -322,7 +322,7 @@ print (lpeg.match(lpeg.Carg(2), "aaaaaaccccc", 0, "bbb", "werwer"))
 ```
 
 
-``` lua
+```lua
 local function multipat(pat)
 	return Ct(blank0 * (pat * blanks) ^ 0 * pat^0 * blank0)
 end
@@ -373,7 +373,7 @@ FIELD结构（optional）：
 ```
 
 基础类型：
-``` lua
+```lua
 local buildin_types = {
 	integer = 0,
 	boolean = 1,
@@ -382,7 +382,7 @@ local buildin_types = {
 }
 ```
 
-``` lua
+```lua
 local function packtype(name, t, alltypes)
 	local fields = {}
 	local tmp = {}
@@ -409,7 +409,7 @@ end
 **七：**
 -------------
 
-``` lua
+```lua
 function packbytes(str)
     return string.pack("<s4",str)
 end
@@ -420,7 +420,7 @@ function packvalue(id)
 end
 ```
 
-``` c
+```c
 for (i=0;i<fn;i++) {
     int value;
     ++tag;
@@ -455,7 +455,7 @@ for (i=0;i<fn;i++) {
 
 之所以说当n是奇数时tag通过((n + 1) * 2)增加(也就是tag += (n + 1) * 2)是因为所谓的奇数时是n=1时((n + 1) * 2) = 1,所以也就是tag+=1（唯一的可能）。
 
-``` c
+```c
 if f.buildin then					
     table.insert(strtbl, packvalue(f.buildin))	-- buildin (tag = 1)
     if f.extra then
@@ -475,7 +475,7 @@ end
 
 当f.buildin表示string or integer类型时f.extra才可能存在，因为integer有个”小数“(decimal)子类型，string有个"二进制"(binary)子类型;否则f.extra不存在，c层import_field里面解析时也会跳过这条数据.
 
-``` c
+```c
 static int
 calc_pow(int base, int n) {
 	int r;

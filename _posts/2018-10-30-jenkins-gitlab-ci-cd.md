@@ -6,7 +6,7 @@ tag: notes
 ---
 
 - 首先我开了一台centos7系统的ECS实例, 安装并启动docker服务, 创建存放kubectl,aws,ssh配置的目录
-    ``` shell
+    ```shell
     sudo yum install docker -y
     sudo systemctl start docker
     mkdir .kube
@@ -14,7 +14,7 @@ tag: notes
     mkdir .ssh  #将gitlab中jenkins用户的私钥配置在本目录，命名为：id_rsa
     ```
 - 在你拥有kubernetes操作权限的主机（其实就是我自己本地的主机）上执行以下命令将kubectl,aws的配置上传到ECS实例，用于容器内部署kubernetes
-    ``` shell
+    ```shell
     ******@iMac-3:~/Dockerfile/jenkins$ scp ~/.aws/config ec2-user@ec2-host:/home/ec2-user/.aws
     config             100%   43     0.2KB/s   00:00
     ******@iMac-3:~/Dockerfile/jenkins$ scp ~/.aws/credentials ec2-user@ec2-host:/home/ec2-user/.aws/
@@ -23,12 +23,12 @@ tag: notes
     config             100% 2027     8.3KB/s   00:00
     ```
 - 在宿主机登陆aws镜像仓库
-    ``` shell
+    ```shell
     aws ecr get-login --no-include-email --region us-east-1 | sudo bash
     ```
     - 下面Jenkinsfile中需要加上 [aws ecr get-login --no-include-email --region us-east-1] 获取的docker登陆命令，这样才能在容器中登陆
 - 如果宿主机没有aws命令，可以执行以下命令安装
-    ``` shell
+    ```shell
     sudo yum install python
     easy_install pip
     pip install tornado
@@ -42,7 +42,7 @@ tag: notes
     - 映射容器开放的8080端口到宿主机; 用于我们通过宿主机ip访问本容器服务
     - 映射容器的50000端口到宿主机; 配置jenkins集群会用到，我并没有用，可以去掉
     - 挂载容器中的jenkins程序主目录到宿主机; 避免容器退出后数据会丢失导致还要重新设置jenkins; 这里没有用绝对路径，默认会指定/var/lib/docker/volumes为绝对路径
-        ``` shell
+        ```shell
         > sudo ls /var/lib/docker/volumes
         jenkins-data  metadata.db
         ```
@@ -51,7 +51,7 @@ tag: notes
     - 挂载kubetl配置到容器中；用于操作eks
     - 挂载aws配置到容器中；用于kubectl操作eks
     - 为容器起个容易记的名字, 否则会随机起名字; blueocean是一个让jenkins更漂亮的插件，而这个镜像自带blueocean插件，以后这个插件会合并到jenkins
-    ``` shell
+    ```shell
     sudo docker run \
         -u root \
         --rm \
@@ -68,7 +68,7 @@ tag: notes
         --name jenkins samoyedsun/blueocean
     ```
 - 可以通过两种方式拿到密码，这个密码只使用一次
-    ``` shell
+    ```shell
     [ec2-user@ip-192-168-237-111 ~]$ sudo docker exec -it jenkins cat /var/jenkins_home/secrets/initialAdminPassword
     dd8464a1d0b448bcaf5e1b134c359585
     [ec2-user@ip-192-168-237-111 ~]$ sudo cat $HOME/jenkins-data/secrets/initialAdminPassword
@@ -162,7 +162,7 @@ tag: notes
 
 ### centos下安装jenkins:
 
-    ``` shell
+    ```shell
     docker run -d -p 8080:8080 -p 50000:50000 -it --privileged --name centos centos /usr/sbin/init
     yum install wget vim initscripts java docker -y
     easy_install pip
