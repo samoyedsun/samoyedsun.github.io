@@ -59,18 +59,16 @@ tag:    issue
             {
                 amount = self_map[i];
             }
+
             int composed_amount_next = (amount + composed_amount) / 4;
             if (composed_amount_next > 0)
             {
                 int real_need_amount = composed_amount_next * 4 - composed_amount;
                 if (real_need_amount > 0)
                     need_map[i] = real_need_amount;
-                else if (real_need_amount < 0)
-                {
-                    // 发现扣多了就还回去
-                    int give_back_amount = 0 - real_need_amount;
+                int give_back_amount = composed_amount - composed_amount_next * 4;
+                if (give_back_amount > 0)
                     give_back_remain(i - 1, give_back_amount, need_map);
-                }
                 composed_amount = composed_amount_next;
             }
             else
@@ -85,10 +83,10 @@ tag:    issue
                 composed_amount = 0;
             }
         }
-        int give_back_amount = composed_amount - need_composed_amount;
-        if (give_back_amount < 0)
+        if (need_composed_amount > composed_amount)
             return -1;
-        else if (give_back_amount > 0)
+        int give_back_amount = composed_amount - need_composed_amount;
+        if (give_back_amount > 0)
             give_back_remain(need_composed_id - 1, give_back_amount, need_map);
         return 0;
     }
