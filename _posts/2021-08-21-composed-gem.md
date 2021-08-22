@@ -18,6 +18,8 @@ tag:    issue
     #include <map>
     using namespace std;
 
+    #define EXCHANGE_WORTH 4
+
     void refund(int begin_index, int refund_amount, map<int, int> &need_map)
     {
         for (int i = begin_index; i >= 1; i--)
@@ -25,7 +27,7 @@ tag:    issue
             map<int, int>::iterator it = need_map.find(i);
             if (it != need_map.end())
             {
-                int after_refund_amount = it->second - refund_amount * 4;
+                int after_refund_amount = it->second - refund_amount * EXCHANGE_WORTH;
                 if (after_refund_amount > 0)
                 {
                     it->second = after_refund_amount;
@@ -44,7 +46,7 @@ tag:    issue
             }
             else
             {
-                refund_amount = refund_amount * 4;
+                refund_amount = refund_amount * EXCHANGE_WORTH;
             }
         }
     }
@@ -60,13 +62,13 @@ tag:    issue
                 amount = self_map[i];
             }
 
-            int composed_amount_next = (amount + composed_amount) / 4;
+            int composed_amount_next = (amount + composed_amount) / EXCHANGE_WORTH;
             if (composed_amount_next > 0)
             {
-                int real_need_amount = composed_amount_next * 4 - composed_amount;
+                int real_need_amount = composed_amount_next * EXCHANGE_WORTH - composed_amount;
                 if (real_need_amount > 0)
                     need_map[i] = real_need_amount;
-                int refund_amount = composed_amount - composed_amount_next * 4;
+                int refund_amount = composed_amount - composed_amount_next * EXCHANGE_WORTH;
                 if (refund_amount > 0)
                     refund(i - 1, refund_amount, need_map);
                 composed_amount = composed_amount_next;
