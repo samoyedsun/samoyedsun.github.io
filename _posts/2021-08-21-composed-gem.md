@@ -27,21 +27,22 @@ tag:    issue
             map<int, int>::iterator it = need_map.find(i);
             if (it != need_map.end())
             {
-                int after_refund_amount = it->second - refund_amount * EXCHANGE_WORTH;
-                if (after_refund_amount > 0)
+                int real_refund_amount = refund_amount * EXCHANGE_WORTH;
+                if (it->second > real_refund_amount)
                 {
-                    it->second = after_refund_amount;
+                    it->second = it->second - real_refund_amount;
                     break;
                 }
-                else if (after_refund_amount == 0)
+                else if (it->second < real_refund_amount)
                 {
+                    refund_amount = real_refund_amount - it->second;
                     need_map.erase(it);
-                    break;
+                    continue;
                 }
                 else
                 {
                     need_map.erase(it);
-                    refund_amount = 0 - after_refund_amount;
+                    break;
                 }
             }
             else
@@ -61,29 +62,27 @@ tag:    issue
             {
                 amount = self_map[i];
             }
-
-            int composed_amount_next = (amount + composed_amount) / EXCHANGE_WORTH;
+            int total_amount = amount + composed_amount;
+            int composed_amount_next = total_amount / EXCHANGE_WORTH;
             if (composed_amount_next > 0)
             {
-                int real_need_amount = composed_amount_next * EXCHANGE_WORTH - composed_amount;
-                if (real_need_amount > 0)
-                    need_map[i] = real_need_amount;
-                int refund_amount = composed_amount - composed_amount_next * EXCHANGE_WORTH;
-                if (refund_amount > 0)
-                    refund(i - 1, refund_amount, need_map);
-                composed_amount = composed_amount_next;
+                int remain_amount = total_amount % EXCHANGE_WORTH;
+                int need_amount = total_amount - remain_amount;
+                if (need_amount > composed_amount)
+                    need_map[i] = need_amount - composed_amount;
+                if (remain_amount > amount)
+                    refund(i - 1, remain_amount - amount, need_map);
             }
             else
             {
-                // 不够合成了就清空之前的记录
                 for (int j = i - 1; j >= 1; j--)
                 {
                     map<int, int>::iterator it = need_map.find(j);
                     if (it != need_map.end())
                         need_map.erase(it);
                 }
-                composed_amount = 0;
             }
+            composed_amount = composed_amount_next;
         }
         if (need_composed_amount > composed_amount)
             return -1;
@@ -103,6 +102,7 @@ tag:    issue
         self_map[4] = 1000;
         self_map[5] = 100;
         self_map[6] = 100;
+        self_map[7] = 1;
         
         map<int, int> need_map;
         int ret = compose(self_map, need_composed_id, need_composed_amount, need_map);
