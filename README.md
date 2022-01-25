@@ -1,5 +1,6 @@
 - 开发命令:
     ```shell
+    sudo apt install ruby-dev -y
     sudo gem install jekyll bundler
     if ["you don‘t have one"]; then
         jekyll new blog
