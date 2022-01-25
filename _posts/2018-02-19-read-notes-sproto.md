@@ -2,7 +2,7 @@
 layout: post
 title:  "阅读笔记之sproto"
 date:   2018-02-19 05:09:26 +0800
-tag: notes
+tag:    notes
 ---
 
 **一：**

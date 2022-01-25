@@ -2,7 +2,7 @@
 layout: post
 title:  "mac平台命令行操作安卓"
 date:   2021-05-22 17:07:26 +0800
-tag: notes
+tag:    notes
 ---
 
 - mac上命令行操作安卓:

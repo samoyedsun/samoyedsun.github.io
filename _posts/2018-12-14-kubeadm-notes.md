@@ -2,7 +2,7 @@
 layout: post
 title:  "kubeadm搭建k8s环境笔记"
 date:   2018-12-14 19:00:26 +0800
-tag: notes
+tag:    notes
 ---
 
 ### 创建ec2:
