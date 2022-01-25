@@ -3,29 +3,21 @@ layout: frontpage
 ---
 <link rel="stylesheet" href="/assets/css/profile.css" />
 <div class="main">
-    <div class="item">
-    </div>
+    <div class="item"></div>
     <div class="bottom">
-        <div class="item" onclick="refreshItemList('equip', '装备')">
-            装备
-        </div>
-        <div class="item" onclick="refreshItemList('skill', '技能')">
-            技能
-        </div>
-        <div class="item">
-            对话
-        </div>
-        <div class="item">
-            足迹
-        </div>
+        <div class="item" family="equip" onclick="refreshItemList(this)"></div>
+        <div class="item" family="skill" onclick="refreshItemList(this)"></div>
+        <div class="item" family="harem" onclick="refreshItemList(this)"></div>
+        <div class="item" family="intro" onclick="refreshItemList(this)"></div>
     </div>
 </div>
 <script>
-    var family = "equip";
-    var familyList = [
-        { family: "equip", name: "装备" },
-        { family: "equip", name: "技能" },
-    ];
+    var familyNameMap = {
+        equip: "装备",
+        skill: "技能",
+        harem: "后宫",
+        intro: "介绍",
+    };
     var itemList = [
         { family: "equip", name: "MacBook Pro", classType: "app-h" },
         { family: "equip", name: "Xiao Mi 10 Pro", classType: "app-h" },
@@ -57,17 +49,31 @@ layout: frontpage
         { family: "equip", name: "京东", classType: "app-s" },
         { family: "equip", name: "巴姆雷特", classType: "app-s" },
         { family: "equip", name: "哔哩哔哩", classType: "app-s" },
-        { family: "skill", name: "C", classType: "app-h" },
+        { family: "skill", name: "C++", classType: "app-h" },
         { family: "skill", name: "Lua", classType: "app-h" },
         { family: "skill", name: "Skynet", classType: "app-h" },
         { family: "skill", name: "Linux", classType: "app-h" },
-        { family: "skill", name: "C++", classType: "app-s" },
         { family: "skill", name: "Bash", classType: "app-s" },
         { family: "skill", name: "Javascript", classType: "app-s" },
         { family: "skill", name: "Python", classType: "app-s" },
         { family: "skill", name: "Cocos Creator", classType: "app-s" },
         { family: "skill", name: "Vim", classType: "app-s" },
         { family: "skill", name: "Vscode", classType: "app-s" },
+        { family: "harem", name: "z-lib.org", classType: "app-h"},
+        { family: "harem", name: "ideobook.com", classType: "app-h"},
+        { family: "harem", name: "blog.kelu.org", classType: "app-h"},
+        { family: "harem", name: "stackexchange.com", classType: "app-h"},
+        { family: "harem", name: "matrix67.com", classType: "app-s"},
+        { family: "harem", name: "imzlp.com", classType: "app-s"},
+        { family: "harem", name: "mixamo.com", classType: "app-s"},
+        { family: "harem", name: "allhistory.com", classType: "app-s"},
+        { family: "harem", name: "godbolt.org", classType: "app-s"},
+        { family: "harem", name: "zh.cppreference.com", classType: "app-s"},
+        { family: "harem", name: "decentraland.org", classType: "app-s"},
+        { family: "harem", name: "diygod.me", classType: "app-s"},
+        { family: "harem", name: "pixijs.com", classType: "app-s"},
+        { family: "harem", name: "melonshell.github.io", classType: "app-s"},
+        { family: "harem", name: "sspai.com", classType: "app-s"},
     ];
     function clearItemList(familyName) {
         var itemClass = document.getElementsByClassName("item")[0];
@@ -81,18 +87,19 @@ layout: frontpage
             itemClass.removeChild(bodyClass);
         }
 
-        var divObj = document.createElement("div");
-        divObj.className = "title";
-        divObj.innerText = familyName;
-        itemClass.appendChild(divObj);
+        titleClass = document.createElement("div");
+        titleClass.className = "title";
+        titleClass.innerText = familyName;
+        itemClass.appendChild(titleClass);
 
-        var divObj = document.createElement("div");
-        divObj.className = "body";
-        itemClass.appendChild(divObj);
+        var bodyClass = document.createElement("div");
+        bodyClass.className = "body";
+        itemClass.appendChild(bodyClass);
     }
-    function refreshItemList(family, familyName) {
-        clearItemList(familyName);
-        for (i = 0; i < itemList.length; ++ i) {
+    function refreshItemList(that) {
+        let family = that.getAttribute("family");
+        clearItemList(familyNameMap[family]);
+        for (let i = 0; i < itemList.length; ++ i) {
             let item = itemList[i];
             if (item.family == family) {
                 var divObj = document.createElement("div");
@@ -102,5 +109,23 @@ layout: frontpage
             }
         }     
     }
-    refreshItemList("equip", "装备");
+
+    // initialization
+    var itemClass = document.getElementsByClassName("bottom")[0];
+    for (let i = 0; i < itemClass.children.length; ++i)
+    {
+        let item = itemClass.children[i];
+        item.innerText = familyNameMap[item.getAttribute("family")];
+    }
+    var family = "equip";
+    clearItemList(familyNameMap[family]);
+    for (let i = 0; i < itemList.length; ++ i) {
+        let item = itemList[i];
+        if (item.family == family) {
+            var divObj = document.createElement("div");
+            divObj.className = item.classType;
+            divObj.innerHTML = item.name;
+            document.getElementsByClassName("body")[0].appendChild(divObj);
+        }
+    } 
 </script>
