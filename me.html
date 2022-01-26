@@ -19,61 +19,69 @@ layout: frontpage
         about: "关于",
     };
     var itemList = [
-        { family: "equip", name: "MacBook Pro", classType: "app-h" },
-        { family: "equip", name: "Xiao Mi 10 Pro", classType: "app-h" },
-        { family: "equip", name: "Redmi AirDots 2", classType: "app-h" },
-        { family: "equip", name: "Telegram", classType: "app-s" },
-        { family: "equip", name: "Gmail", classType: "app-s" },
-        { family: "equip", name: "Chrome", classType: "app-s" },
-        { family: "equip", name: "YouTuBe", classType: "app-s" },
-        { family: "equip", name: "Twiter", classType: "app-s" },
-        { family: "equip", name: "Pinterest", classType: "app-s" },
-        { family: "equip", name: "Shadowsocks", classType: "app-s" },
-        { family: "equip", name: "Analytics", classType: "app-s" },
-        { family: "equip", name: "Quora", classType: "app-s" },
-        { family: "equip", name: "MEGA", classType: "app-s" },
-        { family: "equip", name: "WPS", classType: "app-s" },
-        { family: "equip", name: "QQ", classType: "app-s" },
-        { family: "equip", name: "QQ音乐", classType: "app-s" },
-        { family: "equip", name: "微信", classType: "app-s" },
-        { family: "equip", name: "支付宝", classType: "app-s" },
-        { family: "equip", name: "阿里云", classType: "app-s" },
-        { family: "equip", name: "身份验证器", classType: "app-s" },
-        { family: "equip", name: "百度网盘", classType: "app-s" },
-        { family: "equip", name: "高德地图", classType: "app-s" },
-        { family: "equip", name: "有道云笔记", classType: "app-s" },
-        { family: "equip", name: "钉钉", classType: "app-s" },
-        { family: "equip", name: "优酷", classType: "app-s" },
-        { family: "equip", name: "天猫", classType: "app-s" },
-        { family: "equip", name: "淘宝", classType: "app-s" },
-        { family: "equip", name: "京东", classType: "app-s" },
-        { family: "equip", name: "巴姆雷特", classType: "app-s" },
-        { family: "equip", name: "哔哩哔哩", classType: "app-s" },
-        { family: "skill", name: "C++", classType: "app-h" },
-        { family: "skill", name: "Lua", classType: "app-h" },
-        { family: "skill", name: "Skynet", classType: "app-h" },
-        { family: "skill", name: "Linux", classType: "app-h" },
-        { family: "skill", name: "Bash", classType: "app-s" },
-        { family: "skill", name: "Javascript", classType: "app-s" },
-        { family: "skill", name: "Python", classType: "app-s" },
-        { family: "skill", name: "Cocos Creator", classType: "app-s" },
-        { family: "skill", name: "Vim", classType: "app-s" },
-        { family: "skill", name: "Vscode", classType: "app-s" },
-        { family: "harem", name: "z-lib.org", classType: "app-h"},
-        { family: "harem", name: "ideobook.com", classType: "app-h"},
-        { family: "harem", name: "blog.kelu.org", classType: "app-h"},
-        { family: "harem", name: "stackexchange.com", classType: "app-h"},
-        { family: "harem", name: "matrix67.com", classType: "app-s"},
-        { family: "harem", name: "imzlp.com", classType: "app-s"},
-        { family: "harem", name: "mixamo.com", classType: "app-s"},
-        { family: "harem", name: "allhistory.com", classType: "app-s"},
-        { family: "harem", name: "godbolt.org", classType: "app-s"},
-        { family: "harem", name: "zh.cppreference.com", classType: "app-s"},
-        { family: "harem", name: "decentraland.org", classType: "app-s"},
-        { family: "harem", name: "diygod.me", classType: "app-s"},
-        { family: "harem", name: "pixijs.com", classType: "app-s"},
-        { family: "harem", name: "melonshell.github.io", classType: "app-s"},
-        { family: "harem", name: "sspai.com", classType: "app-s"},
+        { family: "equip", content: "MacBook Pro", classType: "app-h" },
+        { family: "equip", content: "Xiao Mi 10 Pro", classType: "app-h" },
+        { family: "equip", content: "Redmi AirDots 2", classType: "app-h" },
+        { family: "equip", content: "Telegram", classType: "app-s" },
+        { family: "equip", content: "Gmail", classType: "app-s" },
+        { family: "equip", contentent: "Chrome", classType: "app-s" },
+        { family: "equip", content: "YouTuBe", classType: "app-s" },
+        { family: "equip", content: "Twiter", classType: "app-s" },
+        { family: "equip", content: "Pinterest", classType: "app-s" },
+        { family: "equip", content: "Shadowsocks", classType: "app-s" },
+        { family: "equip", content: "Analytics", classType: "app-s" },
+        { family: "equip", content: "Quora", classType: "app-s" },
+        { family: "equip", content: "MEGA", classType: "app-s" },
+        { family: "equip", content: "WPS", classType: "app-s" },
+        { family: "equip", content: "QQ", classType: "app-s" },
+        { family: "equip", content: "QQ音乐", classType: "app-s" },
+        { family: "equip", content: "微信", classType: "app-s" },
+        { family: "equip", content: "支付宝", classType: "app-s" },
+        { family: "equip", content: "阿里云", classType: "app-s" },
+        { family: "equip", content: "身份验证器", classType: "app-s" },
+        { family: "equip", content: "百度网盘", classType: "app-s" },
+        { family: "equip", content: "高德地图", classType: "app-s" },
+        { family: "equip", content: "有道云笔记", classType: "app-s" },
+        { family: "equip", content: "钉钉", classType: "app-s" },
+        { family: "equip", content: "优酷", classType: "app-s" },
+        { family: "equip", content: "天猫", classType: "app-s" },
+        { family: "equip", content: "淘宝", classType: "app-s" },
+        { family: "equip", content: "京东", classType: "app-s" },
+        { family: "equip", content: "巴姆雷特", classType: "app-s" },
+        { family: "equip", content: "哔哩哔哩", classType: "app-s" },
+        { family: "skill", content: "C++", classType: "app-h" },
+        { family: "skill", content: "Lua", classType: "app-h" },
+        { family: "skill", content: "Skynet", classType: "app-h" },
+        { family: "skill", content: "Linux", classType: "app-s" },
+        { family: "skill", content: "Bash", classType: "app-s" },
+        { family: "skill", content: "Javascript", classType: "app-s" },
+        { family: "skill", content: "Python", classType: "app-s" },
+        { family: "skill", content: "Cocos Creator", classType: "app-s" },
+        { family: "skill", content: "Vim", classType: "app-s" },
+        { family: "skill", content: "Vscode", classType: "app-s" },
+        { family: "harem", content: "z-lib.org", classType: "app-h"},
+        { family: "harem", content: "ideobook.com", classType: "app-h"},
+        { family: "harem", content: "blog.kelu.org", classType: "app-h"},
+        { family: "harem", content: "stackexchange.com", classType: "app-s"},
+        { family: "harem", content: "matrix67.com", classType: "app-s"},
+        { family: "harem", content: "imzlp.com", classType: "app-s"},
+        { family: "harem", content: "mixamo.com", classType: "app-s"},
+        { family: "harem", content: "allhistory.com", classType: "app-s"},
+        { family: "harem", content: "godbolt.org", classType: "app-s"},
+        { family: "harem", content: "zh.cppreference.com", classType: "app-s"},
+        { family: "harem", content: "decentraland.org", classType: "app-s"},
+        { family: "harem", content: "diygod.me", classType: "app-s"},
+        { family: "harem", content: "pixijs.com", classType: "app-s"},
+        { family: "harem", content: "melonshell.github.io", classType: "app-s"},
+        { family: "harem", content: "sspai.com", classType: "app-s"},
+        { family: "about", content: "技术圈的王家卫", classType: "app-h"},
+        { family: "about", content: "坚持每天10公里", classType: "app-h"},
+        { family: "about", content: "努力早睡早起", classType: "app-h"},
+        { family: "about", content: "生命不息,战斗不止", classType: "app-s"},
+        { family: "about", content: "战斗的同时懂得知足", classType: "app-s"},
+        { family: "about", content: "努力做好茫茫宇宙种的一粒沙子", classType: "app-s"},
+        { family: "about", content: "思危,思退,思变", classType: "app-s"},
+        { family: "about", content: "幻世不悔", classType: "app-s"},
     ];
     function clearItemList(familyName) {
         var itemClass = document.getElementsByClassName("item")[0];
@@ -104,7 +112,7 @@ layout: frontpage
             if (item.family == family) {
                 var divObj = document.createElement("div");
                 divObj.className = item.classType;
-                divObj.innerHTML = item.name;
+                divObj.innerText = item.content;
                 document.getElementsByClassName("body")[0].appendChild(divObj);
             }
         }     
@@ -117,14 +125,14 @@ layout: frontpage
         let item = itemClass.children[i];
         item.innerText = familyNameMap[item.getAttribute("family")];
     }
-    var family = "equip";
+    var family = "about";
     clearItemList(familyNameMap[family]);
     for (let i = 0; i < itemList.length; ++ i) {
         let item = itemList[i];
         if (item.family == family) {
             var divObj = document.createElement("div");
             divObj.className = item.classType;
-            divObj.innerHTML = item.name;
+            divObj.innerText = item.content;
             document.getElementsByClassName("body")[0].appendChild(divObj);
         }
     } 
