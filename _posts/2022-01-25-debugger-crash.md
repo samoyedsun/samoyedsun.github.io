@@ -67,3 +67,60 @@ tag:    notes
     #0  0x000055805d8ff17d in test01 () at a.cpp:6
     6	    *p = 23;
     ```
+
+- gdb断点调试
+    ```plain
+    PS C:\WorkSpace\exercise\VsCode> gcc -g .\test.c .\func.c -o .\test.exe
+    PS C:\WorkSpace\exercise\VsCode> gdb   < ----------启动GDB
+    GNU gdb (GDB) 7.6.1
+    Copyright (C) 2013 Free Software Foundation, Inc.
+    License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+    This is free software: you are free to change and redistribute it.
+    There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+    and "show warranty" for details.
+    This GDB was configured as "mingw32".
+    For bug reporting instructions, please see:
+    <http://www.gnu.org/software/gdb/bugs/>.
+    (gdb) file test.exe     < ------------------ 指定GDB检测这个可执行文件
+    Reading symbols from C:\WorkSpace\exercise\VsCode\test.exe...done.
+    (gdb) set args Shaw   < ----------设置主函数输入参数args
+    (gdb) info break      < ----------打印程序断点信息
+    No breakpoints or watchpoints.
+    (gdb) break test.c:37  < ----------设置断点
+    Breakpoint 1 at 0x4014ba: file .\test.c, line 37.
+    (gdb) info break
+    Num     Type           Disp Enb Address    What
+    1       breakpoint     keep y   0x004014ba in main at .\test.c:37
+    (gdb) start         < ------------启动代码
+    Temporary breakpoint 2 at 0x401442: file .\test.c, line 25.
+    Starting program: C:\WorkSpace\exercise\VsCode/test.exe Shaw
+    [New Thread 10792.0x300c]
+    [New Thread 10792.0x3798]
+    Temporary breakpoint 2, main (argc=2, argv=0x651560) at .\test.c:25
+    25
+    (gdb) continue    < ------------- 继续执行代码
+    Continuing.
+    main() : begin...
+    argv[0] = C:\WorkSpace\exercise\VsCode/test.exe
+    argv[1] = Shaw
+    Breakpoint 1, main (argc=2, argv=0x651560) at .\test.c:37
+    37          }
+    (gdb) next       < ------------- 运行下一步
+    test_1() : 004013E0
+    38
+    (gdb) next
+    35              fa[i%3]();
+    (gdb) next
+
+    Breakpoint 1, main (argc=2, argv=0x651560) at .\test.c:37
+    37          }
+    (gdb) next
+    test_2() : 004013FC
+    38
+    (gdb) print i     < -------------- 打印变量值
+    $1 = 1
+    (gdb) set var i=100   < ----------------- 设置变量值
+    (gdb) countinue
+    Program received signal SIGSEGV, Segmentation fault.
+    0x00401539 in func () at .\func.c:7
+    ```
