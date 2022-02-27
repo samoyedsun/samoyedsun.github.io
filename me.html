@@ -6,7 +6,7 @@ layout: frontpage
     <div class="item"></div>
     <div class="bottom">
         <div class="item" family="equip" onclick="refreshItemList(this)"></div>
-        <div class="item" family="skill" onclick="refreshItemList(this)"></div>
+        <div class="item" family="book" onclick="refreshItemList(this)"></div>
         <div class="item" family="harem" onclick="refreshItemList(this)"></div>
         <div class="item" family="about" onclick="refreshItemList(this)"></div>
     </div>
@@ -14,7 +14,7 @@ layout: frontpage
 <script>
     var familyNameMap = {
         equip: "装备",
-        skill: "技能",
+        book: "书籍",
         harem: "后宫",
         about: "关于",
     };
@@ -49,16 +49,9 @@ layout: frontpage
         { family: "equip", content: "京东", classType: "app-s" },
         { family: "equip", content: "巴姆雷特", classType: "app-s" },
         { family: "equip", content: "哔哩哔哩", classType: "app-s" },
-        { family: "skill", content: "C++", classType: "app-h" },
-        { family: "skill", content: "Lua", classType: "app-h" },
-        { family: "skill", content: "Skynet", classType: "app-h" },
-        { family: "skill", content: "Linux", classType: "app-s" },
-        { family: "skill", content: "Bash", classType: "app-s" },
-        { family: "skill", content: "Javascript", classType: "app-s" },
-        { family: "skill", content: "Python", classType: "app-s" },
-        { family: "skill", content: "Cocos Creator", classType: "app-s" },
-        { family: "skill", content: "Vim", classType: "app-s" },
-        { family: "skill", content: "Vscode", classType: "app-s" },
+        { family: "book", content: "程序员修炼之道", classType: "app-s" },
+        { family: "book", content: "代码大全", classType: "app-s" },
+        { family: "book", content: "代码整洁之道", classType: "app-s" },
         { family: "harem", content: "z-lib.org", classType: "app-h"},
         { family: "harem", content: "ideobook.com", classType: "app-h"},
         { family: "harem", content: "blog.kelu.org", classType: "app-h"},
