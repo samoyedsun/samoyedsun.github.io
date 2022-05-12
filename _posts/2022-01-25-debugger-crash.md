@@ -8,8 +8,14 @@ tag:    notes
 - core文件生效
     ```bash
     echo "* soft core unlimited" | sudo dd of=/etc/security/limits.d/core.conf
-    #重启 下面这行无法永久修改 重启后总是被重写 以后解决
+    #或 ulimit -c unlimited 
     sudo sysctl -w kernel.core_pattern=/tmp/core-%e.%p.%h.%t
+
+    #重启 上面这行无法永久修改 重启后总是被重写
+    #可编辑apport文件将enabled=1改为enabled=0
+    sudo vim /etc/default/apport
+    #然后重启apport服务即生效
+    sudo systemctl restart apport
     ```
 
 - 编辑崩溃程序(a.cpp)
