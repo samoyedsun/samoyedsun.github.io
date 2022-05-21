@@ -1,6 +1,6 @@
 ---
 layout: postlist
-tag: issue
+tag: skill
 ---
 
 【技术】
