@@ -6,7 +6,7 @@
         jekyll new blog
         cd blog
     fi
-    sudo bundle install
+    bundle install
     bundle exec jekyll build
     bundle exec jekyll server
     ```
