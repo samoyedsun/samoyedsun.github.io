@@ -16,215 +16,214 @@ AOI是mmo游戏中比较核心的技术，可自己只知道个大概，从来�
 
 class Player
 {
-	public:
-		void set_id(int id)
-		{
-			m_id = id;
-		}
-		
-		void set_position(int x, int y)
-		{
-			m_x = x;
-			m_y = y;
-		}
-		
-		int x()
-		{
-			return m_x;
-		}
+    public:
+        void set_id(int id)
+        {
+            m_id = id;
+        }
 
-		int y()
-		{
-			return m_y;
-		}
+        void set_position(int x, int y)
+        {
+            m_x = x;
+            m_y = y;
+        }
 
-		std::vector<Player *> &pobserved_vec()
-		{
-			return m_pobserved_vec;
-		}
+        int x()
+        {
+            return m_x;
+        }
 
-		std::vector<Player *> &pobserver_vec()
-		{
-			return m_pobserver_vec;
-		}
+        int y()
+        {
+            return m_y;
+        }
 
-	public:
-		void add_observed(Player *pplayer)
-		{
-			// 新增一个可广播的人
-			m_pobserved_vec.push_back(pplayer);
-		}
+        std::vector<Player *> &pobserved_vec()
+        {
+            return m_pobserved_vec;
+        }
 
-		void add_observer(Player *pplayer)
-		{
-			// 新增一个可看到的人
-			m_pobserver_vec.push_back(pplayer);
-			// 需要通知前端
-		}
+        std::vector<Player *> &pobserver_vec()
+        {
+            return m_pobserver_vec;
+        }
 
-		void del_observed(Player *pplayer)
-		{
-			// 删除一个可广播的人
-			auto iter = std::find(m_pobserved_vec.begin(), m_pobserved_vec.end(), pplayer);
-			if (iter != m_pobserved_vec.end())
-			{
-				Player *pp = *(m_pobserved_vec.end() - 1);
-				*(m_pobserved_vec.end() - 1) = *iter;
-				*iter = pp;
+    public:
+        void add_observed(Player *pplayer)
+        {
+            // 新增一个可广播的人
+            m_pobserved_vec.push_back(pplayer);
+        }
 
-				m_pobserved_vec.pop_back();
-			}
-		}
+        void add_observer(Player *pplayer)
+        {
+            // 新增一个可看到的人
+            m_pobserver_vec.push_back(pplayer);
+            // 需要通知前端
+        }
 
-		void del_observer(Player *pplayer)
-		{
-			// 删除一个可看到的人
-			auto iter = std::find(m_pobserver_vec.begin(), m_pobserver_vec.end(), pplayer);
-			if (iter != m_pobserver_vec.end())
-			{
-				Player *pp = *(m_pobserver_vec.end() - 1);
-				*(m_pobserver_vec.end() - 1) = *iter;
-				*iter = pp;
+        void del_observed(Player *pplayer)
+        {
+            // 删除一个可广播的人
+            auto iter = std::find(m_pobserved_vec.begin(), m_pobserved_vec.end(), pplayer);
+            if (iter != m_pobserved_vec.end())
+            {
+                Player *pp = *(m_pobserved_vec.end() - 1);
+                *(m_pobserved_vec.end() - 1) = *iter;
+                *iter = pp;
 
-				m_pobserver_vec.pop_back();
-			}
-			// 需要通知前端
-		}
+                m_pobserved_vec.pop_back();
+            }
+        }
 
-		void on_move(Player *pplayer, int x, int y)
-		{
-			// 需要通知前端， 此人移动到了新的位置
-		}
+        void del_observer(Player *pplayer)
+        {
+            // 删除一个可看到的人
+            auto iter = std::find(m_pobserver_vec.begin(), m_pobserver_vec.end(), pplayer);
+            if (iter != m_pobserver_vec.end())
+            {
+                Player *pp = *(m_pobserver_vec.end() - 1);
+                *(m_pobserver_vec.end() - 1) = *iter;
+                *iter = pp;
 
-	
-	private:
-		int m_id;
-		int m_x;
-		int m_y;
-		
-		std::vector<Player *> m_pobserved_vec; // 被观察者列表 用于广播
-		std::vector<Player *> m_pobserver_vec; // 观察者列表 主要用于通知前端展示与不展示
+                m_pobserver_vec.pop_back();
+            }
+            // 需要通知前端
+        }
+
+        void on_move(Player *pplayer, int x, int y)
+        {
+            // 需要通知前端， 此人移动到了新的位置
+        }
+
+    private:
+        int m_id;
+        int m_x;
+        int m_y;
+
+        std::vector<Player *> m_pobserved_vec; // 被观察者列表 用于广播
+        std::vector<Player *> m_pobserver_vec; // 观察者列表 主要用于通知前端展示与不展示
 };
 
 
 class Scene
 {
-	public:
-		void enter(Player *pplayer)
-		{
-			for (auto pp : m_pplayer_vec)
-			{
-				if (_visible(pp, pplayer))
-				{
-					pplayer->add_observer(pp);
-					pp->add_observed(pplayer);
-				}
-				if (_visible(pplayer, pp))
-				{
-					pp->add_observer(pplayer);
-					pplayer->add_observed(pp);
-				}
-			}
-			m_pplayer_vec.push_back(pplayer);
-		}
+    public:
+        void enter(Player *pplayer)
+        {
+            for (auto pp : m_pplayer_vec)
+            {
+                if (_visible(pp, pplayer))
+                {
+                    pplayer->add_observer(pp);
+                    pp->add_observed(pplayer);
+                }
+                if (_visible(pplayer, pp))
+                {
+                    pp->add_observer(pplayer);
+                    pplayer->add_observed(pp);
+                }
+            }
+            m_pplayer_vec.push_back(pplayer);
+        }
 
-		void move(Player *pplayer, int to_x, int to_y)
-		{
-			for (auto pp : m_pplayer_vec)
-			{
-				if (pplayer == pp)
-				{
-					continue;
-				}
-				if (std::find(pplayer->pobserved_vec().begin(),
-					pplayer->pobserved_vec().end(), pp) != pplayer->pobserved_vec().end())
-				{
-					if (_visible(pplayer, pp))
-					{
-						pp->on_move(pplayer, to_x, to_y);
-					}
-					else
-					{
-						pplayer->del_observed(pp);
-						pp->del_observer(pplayer);
-					}
-				}
-				else
-				{
-					if (_visible(pplayer, pp))
-					{
-						pp->add_observer(pplayer);
-						pplayer->add_observed(pp);
-					}
-				}
-				if (std::find(pplayer->pobserver_vec().begin(),
-					pplayer->pobserver_vec().end(), pp) != pplayer->pobserver_vec().end())
-				{
-					if (_visible(pplayer, pp))
-					{
-					}
-					else
-					{
-						pplayer->del_observer(pp);
-						pp->del_observed(pplayer);
-					}
-				}
-				else
-				{
-					if (_visible(pplayer, pp))
-					{
-						pplayer->add_observer(pp);
-						pp->add_observed(pplayer);
-					}
-				}
-			}
-			
-			pplayer->set_position(to_x, to_y);
-		}
+        void move(Player *pplayer, int to_x, int to_y)
+        {
+            for (auto pp : m_pplayer_vec)
+            {
+                if (pplayer == pp)
+                {
+                    continue;
+                }
+                if (std::find(pplayer->pobserved_vec().begin(),
+                    pplayer->pobserved_vec().end(), pp) != pplayer->pobserved_vec().end())
+                {
+                    if (_visible(pplayer, pp))
+                    {
+                        pp->on_move(pplayer, to_x, to_y);
+                    }
+                    else
+                    {
+                        pplayer->del_observed(pp);
+                        pp->del_observer(pplayer);
+                    }
+                }
+                else
+                {
+                    if (_visible(pplayer, pp))
+                    {
+                        pp->add_observer(pplayer);
+                        pplayer->add_observed(pp);
+                    }
+                }
+                if (std::find(pplayer->pobserver_vec().begin(),
+                    pplayer->pobserver_vec().end(), pp) != pplayer->pobserver_vec().end())
+                {
+                    if (_visible(pplayer, pp))
+                    {
+                    }
+                    else
+                    {
+                        pplayer->del_observer(pp);
+                        pp->del_observed(pplayer);
+                    }
+                }
+                else
+                {
+                    if (_visible(pplayer, pp))
+                    {
+                        pplayer->add_observer(pp);
+                        pp->add_observed(pplayer);
+                    }
+                }
+            }
 
-		void leave(Player *pplayer)
-		{
-			for (auto pp : pplayer->pobserver_vec())
-			{
-				pp->del_observed(pplayer);
-			}
-			pplayer->pobserver_vec().clear();
-			for (auto pp : pplayer->pobserved_vec())
-			{
-				pp->del_observer(pplayer);
-			}
-			pplayer->pobserved_vec().clear();
-		}
+            pplayer->set_position(to_x, to_y);
+        }
 
-	private:
-		bool _visible(Player *other, Player *core)
-		{
-			return abs(other->x() - core->x()) <= VISIBLE_AREA && abs(other->y() - core->x()) <= VISIBLE_AREA;
-		}
+        void leave(Player *pplayer)
+        {
+            for (auto pp : pplayer->pobserver_vec())
+            {
+                pp->del_observed(pplayer);
+            }
+            pplayer->pobserver_vec().clear();
+            for (auto pp : pplayer->pobserved_vec())
+            {
+                pp->del_observer(pplayer);
+            }
+            pplayer->pobserved_vec().clear();
+        }
 
-	private:
-		std::vector<Player *> m_pplayer_vec;
+    private:
+        bool _visible(Player *other, Player *core)
+        {
+            return abs(other->x() - core->x()) <= VISIBLE_AREA && abs(other->y() - core->x()) <= VISIBLE_AREA;
+        }
+
+    private:
+        std::vector<Player *> m_pplayer_vec;
 };
 
 int main()
 {
-	Player *pplayer = NULL;
-	Scene *pscene = NULL;
+    Player *pplayer = NULL;
+    Scene *pscene = NULL;
 
-	pscene = new Scene;
+    pscene = new Scene;
 
-	pplayer = new Player;
-	pplayer->set_id(1);
-	pplayer->set_position(1, 2);
-	pscene->enter(pplayer);
-	pscene->leave(pplayer);
+    pplayer = new Player;
+    pplayer->set_id(1);
+    pplayer->set_position(1, 2);
+    pscene->enter(pplayer);
+    pscene->leave(pplayer);
 
-	pplayer = new Player;
-	pplayer->set_id(2);
-	pplayer->set_position(3, 4);
-	pscene->enter(pplayer);
-	pscene->leave(pplayer);
+    pplayer = new Player;
+    pplayer->set_id(2);
+    pplayer->set_position(3, 4);
+    pscene->enter(pplayer);
+    pscene->leave(pplayer);
 
-	return 0;
+    return 0;
 }
 ```
