@@ -14,8 +14,6 @@ tag:    skill
 #include <array>
 #include <queue>
 
-using namespace std;
-
 #define WIDTH 7
 #define HIGHT 5
 #define NODE_SIZE WIDTH * HIGHT
@@ -37,7 +35,7 @@ class Grid
         int y;
         int fv;
         Node *prev;
-        array<Node *, EDT_Max> neighbors;
+        std::array<Node *, EDT_Max> neighbors;
 
         bool operator < (const Node &node) const
         {
@@ -81,7 +79,7 @@ class Grid
         bool find_path(int src_id = 0, int des_id = 0)
         {
             std::bitset<NODE_SIZE> marked;
-            priority_queue<Node *, std::vector<Node *>, less<Node *>> open_pq;
+            std::priority_queue<Node *, std::vector<Node *>, std::less<Node *>> open_pq;
             m_nodes[src_id].fv = 0;
             marked.set(src_id);
             open_pq.push(&m_nodes[src_id]);
@@ -111,11 +109,11 @@ class Grid
 
         void dump_path(int src_id = 0, int des_id = 0)
         {
-            cout << "path: ";
+            std::cout << "path: ";
             int curr_id = des_id;
             while(curr_id != src_id)
             {
-                cout << m_nodes[curr_id].id << "\t";
+                std::cout << m_nodes[curr_id].id << "\t";
                 Node *prev = m_nodes[curr_id].prev;
                 if (prev == NULL)
                 {
@@ -123,28 +121,28 @@ class Grid
                 }
                 curr_id = prev->id;
             }
-            cout << endl;
+            std::cout << std::endl;
         }
         
         void dump()
         {
             for (Node &node : m_nodes)
             {
-                cout << "id:" << node.id << "\t";
-                cout << "y:" << node.y << "\t";
-                cout << "x:" << node.x << "\t";
+                std::cout << "id:" << node.id << "\t";
+                std::cout << "y:" << node.y << "\t";
+                std::cout << "x:" << node.x << "\t";
                 for (Node *node_ptr : node.neighbors)
                 {
                     if (node_ptr == NULL)
                     {
-                        cout << "neighbor:" << -1 << "\t";
+                        std::cout << "neighbor:" << -1 << "\t";
                     }
                     else
                     {
-                        cout << "neighbor:" << node_ptr->id << "\t";
+                        std::cout << "neighbor:" << node_ptr->id << "\t";
                     }
                 }
-                cout << endl;
+                std::cout << std::endl;
             }
 
         }
@@ -156,7 +154,7 @@ class Grid
         }
 
     private:
-        array<Node, NODE_SIZE> m_nodes;
+        std::array<Node, NODE_SIZE> m_nodes;
 };
 
 int main()
@@ -169,8 +167,8 @@ int main()
     int des_id = 34;
     if (grid.find_path(src_id, des_id))
     {
-        cout << "src_id:" << src_id << endl;
-        cout << "des_id:" << des_id << endl;
+        std::cout << "src_id:" << src_id << std::endl;
+        std::cout << "des_id:" << des_id << std::endl;
         grid.dump_path(src_id, des_id);
     }
     return 0;

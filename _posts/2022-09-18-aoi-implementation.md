@@ -14,7 +14,7 @@ AOI是mmo游戏中比较核心的技术，可自己只知道个大概，从来�
 
 #define VISIBLE_AREA 5
 
-struct Player
+class Player
 {
 	public:
 		void set_id(int id)
