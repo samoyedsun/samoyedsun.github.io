@@ -10,25 +10,21 @@ layout: common
 {% endif %}
 
 <article class="post markdown-body">
-    <small>{{ page.date | date: "%Y-%m-%d" }}</small>
+    <small>
+        {{ page.date | date: "%Y-%m-%d" }}   
+    </small>
+
+    <div class="post-title">
+        {{ page.title }}
+    </div>
     
-    <div class="post-title">{{page.title}}</div>
-    
-    {{content}}
+    {{ content }}
 
     <hr/>
-
-    <div>
-    {%- if page.tags.size > 0 -%}
-      Tag{%- if page.tags.size > 1 -%}s{%- endif -%}: 
-          {% for tag in page.tags %}
-              <a href="{{ "tags.html#" | append: tag | relative_url }}" class="tag">{{ tag }}</a>
-          {% endfor %}
-    {%- endif -%}
-    </div>
-  
     {% include comments.html %}
 
-    <h6 style="text-align:center"><a href="http://samoyedsun.github.io/">samoyedsun.github.io</a></h6>
+    <h6 style="text-align:right"><a href="http://samoyedsun.github.io/">samoyedsun.github.io</a></h6>
+    {% include license.html %}
 </article>
 
+        
