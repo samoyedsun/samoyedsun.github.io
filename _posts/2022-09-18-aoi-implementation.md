@@ -198,7 +198,7 @@ class Scene
     private:
         bool _visible(Player *other, Player *core)
         {
-            return abs(other->x() - core->x()) <= VISIBLE_AREA && abs(other->y() - core->x()) <= VISIBLE_AREA;
+            return abs(other->x() - core->x()) <= VISIBLE_AREA && abs(other->y() - core->y()) <= VISIBLE_AREA;
         }
 
     private:
