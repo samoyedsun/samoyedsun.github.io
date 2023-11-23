@@ -3,7 +3,6 @@ layout: post
 title:  游戏服务器针对登录与断线重连的处理
 date:   2023-11-23 13:58:00 +0800
 tag:    skill
-mermaid: true
 ---
 
 
@@ -17,29 +16,29 @@ mermaid: true
 
 <div class="mermaid">
 graph TD;
-  A-->B;
-  A-->C;
-  B-->D;
-  C-->D;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
 </div>
-
+- sdfasfdfasdfsa
 <div class="mermaid">
 sequenceDiagram
-client->>gateway: 连接网关
-loop 创建此连接对应的会话
-    gateway->>gateway: 一段时间没有心跳就关闭连接，释放对应的会话。
-end
-client->>gateway: 登录
-Note right of client: 感觉叫验证更合适一些（Auth）
-loop 验证一下此连接合法性
-    gateway-->>client: 不合法
-    gateway->>game: 登录
-    gateway->>gateway: 一段时间后还是不合法就可以主动关闭此连接，避免无效连接占用。
-end
-loop 一些状态检测
-    gateway->>gateway: 断线时如果此连接是合法并登录成功的连接需要通知此连接对应的游戏服内的玩家离线。
-    gateway->>game: 离线
-end
+    client->>gateway: 连接网关
+    loop 创建此连接对应的会话
+        gateway->>gateway: 一段时间没有心跳就关闭连接，释放对应的会话。
+    end
+    client->>gateway: 登录
+    Note right of client: 感觉叫验证更合适一些（Auth）
+    loop 验证一下此连接合法性
+        gateway-->>client: 不合法
+        gateway->>game: 登录
+        gateway->>gateway: 一段时间后还是不合法就可以主动关闭此连接，避免无效连接占用。
+    end
+    loop 一些状态检测
+        gateway->>gateway: 断线时如果此连接是合法并登录成功的连接需要通知此连接对应的游戏服内的玩家离线。
+        gateway->>game: 离线
+    end
 </div>
 
 这里针对个人情况描述一下核心的流程，具体需求以及优化方案就根据自己实际情况补充。
