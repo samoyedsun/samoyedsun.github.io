@@ -14,25 +14,24 @@ tag:    skill
 
 那如果客户端检测到网络断开了，然后5s后进行重连，服务器一直没检测到断开，这种情况下会出现相对一个客户端有两个连接在服务器的情况怎么处理？如果新连接过来，并验证登录成功了，那我就就告诉旧的连接你被踢了，发个踢下线的包过去，我才是有效合法的，然后延迟1s后把旧连接断开，参见[#延迟断开原因](#reason.delayed_disconnection)，然后这里需要等旧连接断开后再通知game有玩家登录，避免game收到玩家登录包后又收到离线包，可玩家没离线，所以必须先发离线包才能接着发登录包。正常重连的话客户端检测到网络关了才重连的，既然旧连接网络关了，所以也不会收到被踢的消息了，只有真正被踢的时候才会收到，这块服务器不需要做特殊处理。当被真正顶下线的时候旧的那一端会收到被踢下线的包，然后客户端需要处理如果收到被踢的消息，那再断线就不用去重连，避免另一端又被踢下线导致互相踢死循环的情况。
 
-- 大体流程
-    ```mermaid
-        sequenceDiagram
-        client->>gateway: 连接网关
-        loop 创建此连接对应的会话
-            gateway->>gateway: 一段时间没有心跳就关闭连接，释放对应的会话。
-        end
-        client->>gateway: 登录
-        Note right of client: 感觉叫验证更合适一些（Auth）
-        loop 验证一下此连接合法性
-            gateway-->>client: 不合法
-            gateway->>game: 登录
-            gateway->>gateway: 一段时间后还是不合法就可以主动关闭此连接，避免无效连接占用。
-        end
-        loop 一些状态检测
-            gateway->>gateway: 断线时如果此连接是合法并登录成功的连接需要通知此连接对应的游戏服内的玩家离线。
-            gateway->>game: 离线
-        end
-    ```
+```mermaid
+sequenceDiagram
+client->>gateway: 连接网关
+loop 创建此连接对应的会话
+    gateway->>gateway: 一段时间没有心跳就关闭连接，释放对应的会话。
+end
+client->>gateway: 登录
+Note right of client: 感觉叫验证更合适一些（Auth）
+loop 验证一下此连接合法性
+    gateway-->>client: 不合法
+    gateway->>game: 登录
+    gateway->>gateway: 一段时间后还是不合法就可以主动关闭此连接，避免无效连接占用。
+end
+loop 一些状态检测
+    gateway->>gateway: 断线时如果此连接是合法并登录成功的连接需要通知此连接对应的游戏服内的玩家离线。
+    gateway->>game: 离线
+end
+```
 
 这里针对个人情况描述一下核心的流程，具体需求以及优化方案就根据自己实际情况补充。
 
