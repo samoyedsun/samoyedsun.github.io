@@ -1,8 +1,8 @@
 ---
-layout: hidepost
+layout: post
 title:  "Who落下的故事"
 date:   2020-08-18 00:00:01 +0800
-tag:    story
+tag:    hide
 ---
 
 ### 一个中专生的美国梦:我的美国留学记(一)

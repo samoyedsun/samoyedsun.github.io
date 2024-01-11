@@ -1,8 +1,8 @@
 ---
-layout: hidepost
+layout: post
 title:  "时空"
 date:   2020-08-20 06:13:01 +0800
-tag: story
+tag:    hide
 ---
 
 在这个

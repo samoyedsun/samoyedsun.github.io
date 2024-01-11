@@ -1,8 +1,8 @@
 ---
-layout: hidepost
+layout: post
 title:  "泰戈尔:清华演讲"
 date:   2018-02-20 22:08:26 +0800
-tag:    story
+tag:    hide
 ---
 
 “你们的使命是在拿天堂给人间，拿灵魂来给一切的事物。”
