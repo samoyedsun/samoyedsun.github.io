@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: hidepost
 title:  "泰戈尔:清华演讲"
 date:   2018-02-20 22:08:26 +0800
 tag:    story

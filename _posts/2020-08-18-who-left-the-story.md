@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: hidepost
 title:  "Who落下的故事"
 date:   2020-08-18 00:00:01 +0800
 tag:    story
