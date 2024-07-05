@@ -161,8 +161,8 @@ tag:    notes
     - 提高产品整体的交付效率.
 
 ### centos下安装jenkins:
-
-    ```shell
+- 执行脚本
+    ```bash
     docker run -d -p 8080:8080 -p 50000:50000 -it --privileged --name centos centos /usr/sbin/init
     yum install wget vim initscripts java docker -y
     easy_install pip
