@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  MRZ语录
+title:  关于计算机中的负数
 date:   2024-08-30 11:48:00 +0800
-tag:    story
+tag:    skill
 ---
 
 
