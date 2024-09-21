@@ -55,8 +55,6 @@ server {
 	# Add index.php to the list if you are using PHP
 	index index.html index.htm index.nginx-debian.html;
 
-	server_name my.domain.com;
-
 	location / {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
@@ -90,3 +88,39 @@ systemctl reload nginx
 ```
 
 至此结束，可以通过https访问你的网站了。
+
+配置nginx代理服务
+```conf
+server {
+	listen       443 ssl;
+	listen 	[::]:443 ssl;
+	server_name  tgbot.wuwu8.xyz;
+
+	ssl_certificate /etc/nginx/cert/tgbot.wuwu8.xyz.cer;
+	ssl_certificate_key /etc/nginx/cert/tgbot.wuwu8.xyz.key;
+
+	ssl_protocols TLSv1.2 TLSv1.3;
+	ssl_prefer_server_ciphers on;
+	ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
+
+	add_header Strict-Transport-Security "max-age=31536000; includeSubdomains; preload";
+
+	ssl_stapling on;
+	ssl_stapling_verify on;
+	ssl_trusted_certificate /etc/nginx/cert/tgbot.wuwu8.xyz.cer;
+
+	location / {
+		proxy_pass http://localhost:8103;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Real-PORT $remote_port;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+
+		client_max_body_size 10M;
+
+		proxy_http_version 1.1;
+		proxy_set_header Connection "";
+	}
+}
+```
