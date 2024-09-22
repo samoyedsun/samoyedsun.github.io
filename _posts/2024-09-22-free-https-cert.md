@@ -94,10 +94,10 @@ systemctl reload nginx
 server {
 	listen       443 ssl;
 	listen 	[::]:443 ssl;
-	server_name  tgbot.wuwu8.xyz;
+	server_name  my.domain.com;
 
-	ssl_certificate /etc/nginx/cert/tgbot.wuwu8.xyz.cer;
-	ssl_certificate_key /etc/nginx/cert/tgbot.wuwu8.xyz.key;
+	ssl_certificate /etc/nginx/cert/my.domain.com.cer;
+	ssl_certificate_key /etc/nginx/cert/my.domain.com.key;
 
 	ssl_protocols TLSv1.2 TLSv1.3;
 	ssl_prefer_server_ciphers on;
@@ -107,7 +107,7 @@ server {
 
 	ssl_stapling on;
 	ssl_stapling_verify on;
-	ssl_trusted_certificate /etc/nginx/cert/tgbot.wuwu8.xyz.cer;
+	ssl_trusted_certificate /etc/nginx/cert/my.domain.com.cer;
 
 	location / {
 		proxy_pass http://localhost:8103;
