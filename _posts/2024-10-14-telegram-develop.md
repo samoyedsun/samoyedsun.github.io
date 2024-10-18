@@ -15,7 +15,7 @@ tag:    skill
     ```bash
     TELEGRAM_BOT_TOKEN="987654321:AAGrbbbbbbbbbbbbbbX44dSXccccc"
     curl -X POST https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook \
-    -d url=https://tgbot.wuwu8.xyz/portal \
+    -d url=https://www.baidu.com/portal \
     -d allowed_updates=["message", "callback_query"]
     
     curl -X GET https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getWebhookInfo
@@ -24,4 +24,3 @@ tag:    skill
     
 - Thinks:
     - https://grammy.dev/zh/guide/games
-    
