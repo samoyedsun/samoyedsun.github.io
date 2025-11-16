@@ -14,7 +14,8 @@ tag:    skill
 
 那如果客户端检测到网络断开了，然后5s后进行重连，服务器一直没检测到断开，这种情况下会出现相对一个客户端有两个连接在服务器的情况怎么处理？如果新连接过来，并验证登录成功了，那我就就告诉旧的连接你被踢了，发个踢下线的包过去，我才是有效合法的，然后延迟1s后把旧连接断开，参见[#延迟断开原因](#reason.delayed_disconnection)，然后这里需要等旧连接断开后再通知game有玩家登录，避免game收到玩家登录包后又收到离线包，可玩家没离线，所以必须先发离线包才能接着发登录包。正常重连的话客户端检测到网络关了才重连的，既然旧连接网络关了，所以也不会收到被踢的消息了，只有真正被踢的时候才会收到，这块服务器不需要做特殊处理。当被真正顶下线的时候旧的那一端会收到被踢下线的包，然后客户端需要处理如果收到被踢的消息，那再断线就不用去重连，避免另一端又被踢下线导致互相踢死循环的情况。
 
-<div class="mermaid">
+
+```mermaid
 sequenceDiagram
     client->>gateway: 连接网关
     loop 创建此连接对应的会话
@@ -31,9 +32,19 @@ sequenceDiagram
         gateway->>gateway: 断线时如果此连接是合法并登录成功的连接需要通知此连接对应的游戏服内的玩家离线。
         gateway->>game: 离线
     end
-</div>
+```
 
 这里针对个人情况描述一下核心的流程，具体需求以及优化方案就根据自己实际情况补充。
+
+- 假设是微信登陆游戏
+  - 首次登陆时检测到没有access_token那就先通过微信sdk拉起微信app授权得到code
+  - 然后再通过code请求游戏web api服务器使其请求微信的/sns/oauth2/access_token拿到access_token和refresh_token（这里可以通过access_token生成一个game_token）
+  - 后面登陆时检测客户端缓存的access_token是否有效（未过期），如果有效就直接连接游戏服务器请求登陆
+  - 如果access_token无效再发送refresh_token到web aip服务器去微信服务器刷新access_token
+  - 然后再连接游戏服务器用新access_token请求登陆
+  - 如果刷新access_token失败说明（refresh_token也过期）那就拉起微信app重新授权得到code再去请求web api服务器拿到access_token进行登陆
+  - 整个流程客户端是不需要存游戏服务器中的uid，因为一个token只对应一个uid，如果为了高效可以在redis中搞个access_token=uid的映射，不过增加了复杂度，想省事又高效的话那就存一下也没啥影响
+  - 加game_token主要用于重连时高效的效验同时与access_token解耦，可在心跳和下线时刷新game_token
 
 <a id="reason.delayed_disconnection"></a>
 ##### 延迟断开原因
