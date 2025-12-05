@@ -29,6 +29,11 @@ server_name my.domain.com;
 systemctl reload nginx
 ```
 
+第一次操作需要执行(xxxxxxxxxxx@163.com是你注册freessl.cn的邮箱)
+```bash
+acme.sh --register-account -m xxxxxxxxxxx@163.com
+```
+
 生成证书
 ```bash
 acme.sh --issue -d my.domain.com --nginx
