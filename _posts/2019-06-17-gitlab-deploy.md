@@ -37,32 +37,43 @@ tag:    notes
         注：执行完成后，出现邮件配置，选择Internet那一项（不带Smarthost的）如下所示：
         
         选择完后，后面的东西，随便填吧，没啥卵用~
-- 利用[清华大学的镜像](https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/)来进行主程序的安装
-    - 首先信任 GitLab 的 GPG 公钥:
+- 旧安装方式
+    - 利用[清华大学的镜像](https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/)来进行主程序的安装
+        - 首先信任 GitLab 的 GPG 公钥:
+            ```bash
+            curl https://packages.gitlab.com/gpg.key 2> /dev/null | sudo apt-key add - &>/dev/null
+            ```
+        - 使用root用户修改配置文件:
+            ```bash
+            echo "deb https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu xenial main" >> /etc/apt/sources.list.d/gitlab-ce.list
+            ```
+    - 安装 gitlab-ce:
         ```bash
-        curl https://packages.gitlab.com/gpg.key 2> /dev/null | sudo apt-key add - &>/dev/null
+        apt update -y
+        apt list --upgradable
+        # 安装最新版本
+        apt install gitlab-ce -y
+        # 安装指定版本
+        apt install gitlab-ce=12.0.0-ce.0
+        # 查看全部版本
+        apt-cache madison gitlab-ce
+        # 查看当前版本
+        gitlab-rake gitlab:env:info
         ```
-    - 使用root用户修改配置文件:
+        注： 有点慢 耐心等吧~ 
+- 新安装方式
+    - 下载
         ```bash
-        echo "deb https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu xenial main" >> /etc/apt/sources.list.d/gitlab-ce.list
+        wget --content-disposition https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/bionic/gitlab-ce_12.0.0-ce.0_amd64.deb/download.deb
         ```
-- 安装 gitlab-ce:
-    ```bash
-    apt update -y
-    apt list --upgradable
-    # 安装最新版本
-    apt install gitlab-ce -y
-    # 安装指定版本
-    apt install gitlab-ce=12.0.0-ce.0
-    # 查看全部版本
-    apt-cache madison gitlab-ce
-    # 查看当前版本
-    gitlab-rake gitlab:env:info
-    ```
-    注： 有点慢 耐心等吧~ 
+    - 安装
+        ```bash
+        sudo dpkg -i gitlab-ce_12.0.0-ce.0_amd64.deb
+        ```
+        注： 有点慢 耐心等吧~ 
 - 修改配置:
     ```bash
-    vi /etc/gitlab/gitlab.rb
+    vim /etc/gitlab/gitlab.rb
     #更改external_url =http://39.108.250.83 (IP换成你本机的IP地址)
     ```
 - 启动sshd和postfix服务
